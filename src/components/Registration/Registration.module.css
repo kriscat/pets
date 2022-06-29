@@ -1,0 +1,19 @@
+.registrationWrapper {
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3)
+    
+}
+
+.registration {
+    width: 30%;
+    height: 30%;
+    margin: 200px auto;
+    border: 1px solid blue;
+    border-radius: 15px;
+    background-color: cadetblue;
+}
