@@ -1,0 +1,18 @@
+.root {
+    width: 70%;
+    height: auto;
+    margin: 20px auto;
+    text-align: justify;
+
+}
+
+.title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: 600;
+}
+

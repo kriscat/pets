@@ -5,15 +5,22 @@
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.3)
-    
+    background-color: rgba(0, 0, 0, 0.3)  
 }
 
 .registration {
-    width: 30%;
-    height: 30%;
+    width: 50%;
+    height: 45%;
     margin: 200px auto;
-    border: 1px solid blue;
+    padding: 60px;
+    border: 1px solid #87805E;
     border-radius: 15px;
-    background-color: cadetblue;
+    background-color: #EDDFB3;
+}
+
+.button{
+    position: fixed;
+    left: 70%;
+    top: 35%;
+   
 }

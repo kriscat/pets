@@ -1,0 +1,29 @@
+.root {
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    text-align: center;
+    align-items: center;
+
+}
+
+.block {
+    width: 30%;
+    height: auto;
+    border: 1px solid #87805e;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+.blockName {
+    padding: 5px;
+    font-weight: 600;
+    padding: 10px;
+    margin: 1px;
+    background-color: #87805e;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+}
