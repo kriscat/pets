@@ -1,10 +1,11 @@
 import React from 'react'
-import CreateAd from '../CreateAd/CreateAd';
+import CreateItem from '../CreateItem';
+
 
 const Cats = () => {
   return (
     <>
-      <CreateAd/>
+    
     </>
   )
 }

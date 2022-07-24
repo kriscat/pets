@@ -2,15 +2,19 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import style from "./Layout.module.css";
 import { routes } from "../../routes/routes";
-import Registration from "../Registration/Registration";
-import { Content } from "antd/lib/layout/layout";
+import RegistrationModal from "../Registration";
+import { Content, Footer } from "antd/lib/layout/layout";
+import { auth } from "../../Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Menu } from "antd";
 
-const setActive = ({ isActive }) => (isActive ? style.active + " " + style.link : style.link);
 const Layout = () => {
   const [clicked, setClicked] = useState(false);
   const handleClick = () => setClicked(true);
 
-  const [isAuth, setIsAuth] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
 
   const displayRoutes = () => {
     return routes.map((e) => <Route path={e.path} element={e.element} />);
@@ -18,52 +22,66 @@ const Layout = () => {
 
   return (
     <>
-      <header className={style.header}>
-        <div>
-          <NavLink to="/" className={setActive}>
-            Главная страница
-          </NavLink>
-          <NavLink to="cats" className={setActive}>
-            Кошки
-          </NavLink>
-          <NavLink to="dogs" className={setActive}>
-            Собаки
-          </NavLink>
-          <NavLink to="how-to-care" className={setActive}>
-            Как ухаживать
-          </NavLink>
-          <NavLink to="hospitals" className={setActive}>
-            Ветклиники
-          </NavLink>
-        </div>
-        {isAuth && (
-          <NavLink to="user-profile" className={style.registrationButton}>
-            Личный кабинет
-          </NavLink>
-        )}
-        {!isAuth && (
-          <div className={style.registrationButton} onClick={handleClick}>
-            Регистрация
-          </div>
-        )}
+      <header>
+        <Menu mode="horizontal">
+          <Menu.Item>
+            <NavLink to="/">Главная страница</NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="cats">Кошки</NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="dogs">Собаки</NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="other-animals">Другие животные</NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="how-to-care">Как ухаживать</NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="hospitals">Ветклиники</NavLink>
+          </Menu.Item>
+          {user != undefined && (
+            <Menu.SubMenu icon={<UserOutlined />} className={style.submenu}>
+              <Menu.Item>
+                <NavLink to="create-item">Добавить объявление</NavLink>
+              </Menu.Item>
+              <Menu.Item>
+                <NavLink to="user-profile">Личный кабинет</NavLink>
+              </Menu.Item>
+              <Menu.Item
+                danger
+                icon={<LogoutOutlined />}
+                onClick={() => {
+                  signOut(auth);
+                }}
+              >
+                Выйти
+              </Menu.Item>
+            </Menu.SubMenu>
+          )}
 
-        {clicked && <Registration setActive={setClicked} />}
+          {user == undefined && (
+            <Menu.Item className={style.submenu}>
+              <RegistrationModal />
+            </Menu.Item>
+          )}
+        </Menu>
       </header>
       <Content
         style={{
           padding: "20px 50px",
         }}
       >
+        {/* {user && user.email} */}
         <Routes>{displayRoutes()}</Routes>
       </Content>
 
-      <footer className={style.footer}>
-        <button className={style.button} onClick={() => window.location.assign("https://t.me/myaaaau")}>
-          {" "}
-          Нажми сюда, если у тебя возникнут вопросы
-        </button>
-        <p>© 2022</p>
-      </footer>
+      <Footer style={{ textAlign: "center" }}>
+        <a href="https://t.me/myaaaau">Нажми сюда, если у тебя возникнут вопросы</a>
+        <span> © 2022</span>
+      </Footer>
     </>
   );
 };

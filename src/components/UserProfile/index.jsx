@@ -1,9 +1,13 @@
 import React from 'react';
+import { auth } from "../../Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const index = () => {
+const UserProfile = () => {
+    const [user, loading, error] = useAuthState(auth);
   return (
-    <div>index</div>
+    <div>Вы вошли, как {user.email}</div>
+    
   )
 }
 
-export default index;
+export default UserProfile;
