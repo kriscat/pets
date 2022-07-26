@@ -2,7 +2,7 @@ import React from 'react'
 
 const Dogs = () => {
   return (
-    <div>Dogs</div>
+    <h3>Объявления по пристройству собак:</h3>
   )
 }
 

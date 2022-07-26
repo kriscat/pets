@@ -1,9 +1,7 @@
 import React from 'react';
 
 const OtherAnimals = () => {
-  return (
-    <div>index</div>
-  )
+  return <h3>Объявления по пристройству других животных:</h3>;
 }
 
 export default OtherAnimals;

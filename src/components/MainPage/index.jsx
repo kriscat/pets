@@ -1,6 +1,6 @@
 import React from 'react';
 import style from "./MainPage.module.css";
-import image from "../../images/logo.jpg";
+import image from "../../images/10668.jpg";
 import RegistrationModal from '../Registration';
 
 const MainPage = () => {

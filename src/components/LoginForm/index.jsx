@@ -16,7 +16,7 @@ const LoginForm = ({ closeModal }) => {
   };
 
   if (loading) {
-    return <Spin />;
+    return <Spin size="large" style={{ marginLeft: "50%" }} />;
   }
   if (user) {
     closeModal();

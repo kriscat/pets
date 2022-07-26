@@ -9,6 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
+import ErrorPage from "../ErrorPage";
 
 const Layout = () => {
   const [clicked, setClicked] = useState(false);
@@ -19,7 +20,6 @@ const Layout = () => {
   const displayRoutes = () => {
     return routes.map((e) => <Route path={e.path} element={e.element} />);
   };
-
   return (
     <>
       <header>
@@ -75,7 +75,10 @@ const Layout = () => {
         }}
       >
         {/* {user && user.email} */}
-        <Routes>{displayRoutes()}</Routes>
+        <Routes>
+               
+          {displayRoutes()}
+        </Routes>
       </Content>
 
       <Footer style={{ textAlign: "center" }}>

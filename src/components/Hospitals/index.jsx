@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Col, Row } from 'antd';
-import style from "./Hospitals.module.css";
 import { Content } from 'antd/lib/layout/layout';
+import { PhoneOutlined } from '@ant-design/icons';
 
 const cardsData = [
   {
@@ -70,19 +70,22 @@ const cardsData = [
 
 const Hospital = () => {
     return (
-        <Content className="site-card-wrapper"  >
-      <Row gutter={24}>  
-          {cardsData.map((e) => <Col span={8}> <Card title={e.clinic} bordered={true} >
-              <p>{e.region}</p>
-              <p>{e.address}</p>
-              <a href={"tel:"+e.tel}>{e.tel}</a>
-          </Card>
-          </Col>)}
-      
-      </Row>
-    </Content>
-
-  )
+      <Content className="site-card-wrapper" >
+        <Row gutter={24}>
+          {cardsData.map((e) => (
+            <Col span={8}>
+              <Card title={e.clinic} bordered={true}>
+                <p>{e.region}</p>
+                <p>{e.address}</p>
+                <a href={"tel:" + e.tel}>
+                  <PhoneOutlined style={{ fontSize: "20px" }} /> {e.tel}
+                </a>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Content>
+    );
  
   }
 

@@ -81,7 +81,7 @@ const Createitem = () => {
             <Select.Option value="khorezm">Хорезмская область</Select.Option>
           </Select>
         </Form.Item>
-        {/* <Form.Item
+        <Form.Item
           name="animalType"
           label={"Кого вы пристраиваете"}
           rules={[
@@ -96,9 +96,9 @@ const Createitem = () => {
             <Radio value="dog"> собака </Radio>
             <Radio value="other"> другое </Radio>
           </Radio.Group>
-        </Form.Item> */}
+        </Form.Item>
 
-        {/* <Form.Item
+        <Form.Item
           name="gender"
           label={"Укажите пол животного"}
           rules={[
@@ -112,9 +112,9 @@ const Createitem = () => {
             <Radio value="female"> женский </Radio>
             <Radio value="male"> мужской </Radio>
           </Radio.Group>
-        </Form.Item> */}
+        </Form.Item>
 
-        {/* <Form.Item
+        <Form.Item
           name="passport"
           label={"У животного есть паспорт?"}
           rules={[
@@ -128,9 +128,9 @@ const Createitem = () => {
             <Radio value="passportYes"> да </Radio>
             <Radio value="passportNo"> нет </Radio>
           </Radio.Group>
-        </Form.Item> */}
+        </Form.Item>
 
-        {/* <Form.Item
+        <Form.Item
           name="miteTreatment"
           label={"У животного есть обработка от клещей/блох?"}
           rules={[
@@ -144,9 +144,9 @@ const Createitem = () => {
             <Radio value="mitetreaTmentyes"> да </Radio>
             <Radio value="mitetreaTmentno"> нет </Radio>
           </Radio.Group>
-        </Form.Item> */}
+        </Form.Item>
 
-        {/* <Form.Item
+        <Form.Item
           name="viralVaccine"
           label={"У животного есть необходимые прививки от вирусных заболеваний?"}
           rules={[
@@ -160,9 +160,9 @@ const Createitem = () => {
             <Radio value="viralVaccineYes"> да </Radio>
             <Radio value="viralVaccineNo"> нет </Radio>
           </Radio.Group>
-        </Form.Item> */}
+        </Form.Item>
 
-        {/* <Form.Item
+        <Form.Item
           name="rabiesVaccine"
           label={"У животного есть необходимые прививка от бешенства?"}
           rules={[
@@ -176,9 +176,9 @@ const Createitem = () => {
             <Radio value="rabiesVaccineYes"> да </Radio>
             <Radio value="rabiesVaccineNo"> нет </Radio>
           </Radio.Group>
-        </Form.Item> */}
+        </Form.Item>
 
-        {/* <Form.Item
+        <Form.Item
           name="age"
           label={"Укажите возраст животного"}
           rules={[
@@ -189,11 +189,11 @@ const Createitem = () => {
           ]}
         >
           <InputNumber min="0" max="99" step="0.1"></InputNumber>
-        </Form.Item> */}
+        </Form.Item>
 
-        {/* <Form.Item name="moreInfo" label={"Дополнительная информация"}>
+        <Form.Item name="moreInfo" label={"Дополнительная информация"}>
           <TextArea />
-        </Form.Item> */}
+        </Form.Item>
 
         <Form.Item
           name="upload"
@@ -211,7 +211,7 @@ const Createitem = () => {
           </Upload>
         </Form.Item>
 
-        {/* <Form.Item
+        <Form.Item
           name="tel"
           label={"Введите номер телефона"}
           rules={[
@@ -222,7 +222,7 @@ const Createitem = () => {
           ]}
         >
           <Input></Input>
-        </Form.Item> */}
+        </Form.Item>
         <Form.Item label={"Нажмите, чтоб опубликовать"}>
           <Button htmlType="submit" type="primary">
             Опубликовать

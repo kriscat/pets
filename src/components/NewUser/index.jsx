@@ -27,7 +27,7 @@ const SignIn = ({closeModal}) => {
   };
  
   if (loading) {
-    return <Spin />;
+    return <Spin size="large" style={{ marginLeft: "50%" }} />;
   }
   if (user) {
    return (
@@ -66,7 +66,12 @@ const SignIn = ({closeModal}) => {
           },
         ]}
       >
-        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          type="email"
+          value={email}
+          placeholder="обязательно наличие символа @"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item
@@ -79,7 +84,12 @@ const SignIn = ({closeModal}) => {
           },
         ]}
       >
-        <Input.Password type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Input.Password
+          type="password"
+          value={password}
+          placeholder="минимальное количество символов - 7"
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './App.less';
-import Preloader from './components/Preloader/Preloader';
+import Preloader from './components/Preloader';
 import Layout from "./components/Layout/Layout";
+import { Spin } from 'antd';
 function App() {
 
   const [loader, setLoader] = useState(true);
   useEffect(() => {
     setLoader(false);
   }, []);
-  
-  if (loader) return <Preloader />;
+   if (loader) return <Preloader/>;
 
   return (
     <div className="App">

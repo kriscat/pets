@@ -1,6 +1,7 @@
 .mainpage {
+    min-height: calc(100vh - 157px);
     display: flex;
-    padding: 15px;
+    padding: 35px;
     text-align: center;
 }
 
@@ -21,5 +22,5 @@
 }
 
 .image{
-    width: 432px;
+    width: 550px;
 }
