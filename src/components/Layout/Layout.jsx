@@ -9,7 +9,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
-import ErrorPage from "../ErrorPage";
 
 const Layout = () => {
   const [clicked, setClicked] = useState(false);
@@ -27,15 +26,18 @@ const Layout = () => {
           <Menu.Item>
             <NavLink to="/">Главная страница</NavLink>
           </Menu.Item>
-          <Menu.Item>
-            <NavLink to="cats">Кошки</NavLink>
-          </Menu.Item>
-          <Menu.Item>
-            <NavLink to="dogs">Собаки</NavLink>
-          </Menu.Item>
-          <Menu.Item>
-            <NavLink to="other-animals">Другие животные</NavLink>
-          </Menu.Item>
+          <Menu.SubMenu title= "Выбрать питомца" >
+            <Menu.Item>
+              <NavLink to="cats">Кошки</NavLink>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="dogs">Собаки</NavLink>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="other-animals">Другие животные</NavLink>
+            </Menu.Item>
+          </Menu.SubMenu>
+
           <Menu.Item>
             <NavLink to="how-to-care">Как ухаживать</NavLink>
           </Menu.Item>
@@ -75,10 +77,7 @@ const Layout = () => {
         }}
       >
         {/* {user && user.email} */}
-        <Routes>
-               
-          {displayRoutes()}
-        </Routes>
+        <Routes>{displayRoutes()}</Routes>
       </Content>
 
       <Footer style={{ textAlign: "center" }}>

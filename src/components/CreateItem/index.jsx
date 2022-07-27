@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Radio, InputNumber, Modal, Select } from "antd";
+import React, { useState, useEffect } from "react";
+import { Form, Input, Button, Radio, InputNumber, Modal, Select, Spin } from "antd";
 import Upload from "antd/lib/upload/Upload";
 import { database, storage } from "../../Firebase";
 import { ref, set } from "firebase/database";
@@ -42,6 +42,7 @@ const Createitem = () => {
       console.log("File available at", downloadURL);
       set(ref(database, "pet/1"), values);
       setIsModalVisible(true);
+
       Modal.success({
         content: "Ваше объявление успешно добавлено",
         onOk: () => {
@@ -221,10 +222,10 @@ const Createitem = () => {
             },
           ]}
         >
-          <Input></Input>
+          <Input prefix="+998" min={1} max={10}></Input>
         </Form.Item>
         <Form.Item label={"Нажмите, чтоб опубликовать"}>
-          <Button htmlType="submit" type="primary">
+          <Button htmlType="submit" type="primary" >
             Опубликовать
           </Button>
         </Form.Item>

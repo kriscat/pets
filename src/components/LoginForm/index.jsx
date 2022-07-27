@@ -27,9 +27,6 @@ const LoginForm = ({ closeModal }) => {
       labelCol={{
         span: 8,
       }}
-      // wrapperCol={{
-      //   span: 15,
-      // }}
       initialValues={{
         remember: true,
       }}

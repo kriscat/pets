@@ -4,7 +4,6 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../Firebase";
 import { Spin } from "antd";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import Registration from "../Registration";
 import { CheckCircleOutlined } from "@ant-design/icons";
 
 const createUser = (values) => {
@@ -45,9 +44,6 @@ const SignIn = ({closeModal}) => {
       labelCol={{
         span: 8,
       }}
-      // wrapperCol={{
-      //   span: 12,
-      // }}
       initialValues={{
         remember: true,
       }}
