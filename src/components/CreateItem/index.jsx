@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Radio, InputNumber, Modal, Select, Spin } from "antd";
 import Upload from "antd/lib/upload/Upload";
 import { database, storage } from "../../Firebase";
-import { ref, set } from "firebase/database";
+import { ref, push, set } from "firebase/database";
 import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../Firebase";
 
 const { TextArea } = Input;
 
@@ -17,34 +19,39 @@ const customUpload = async ({ onError, onSuccess, file }) => {
   const imagesRef = storageref(storage, "images/foto.jpg");
   uploadBytes(imagesRef, file)
     .then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-      console.log(snapshot);
+      // console.log("Uploaded a blob or file!");
+      // console.log(snapshot);
       onSuccess(snapshot);
     })
     .catch((e) => {
       onError(e);
-      console.log(e);
+      // console.log(e);
     });
 };
 
 const Createitem = () => {
   const [form] = Form.useForm();
-
+const [user, loading, error] = useAuthState(auth);
   const [isModalVisible, setIsModalVisible] = useState(false);
   let navigate = useNavigate();
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleSubmit = (values) => {
+    setIsSaving(true);
     const imagesRef = storageref(storage, "images/foto.jpg");
-    console.log(values);
+    // console.log(values);
 
     getDownloadURL(imagesRef).then((downloadURL) => {
+      const petRef = ref(database, "pet");
+      const newPetRef = push(petRef);
       values.upload = downloadURL;
       console.log("File available at", downloadURL);
-      set(ref(database, "pet/1"), values);
+      values.user_uid = user.uid;
+      set(newPetRef, values);
       setIsModalVisible(true);
 
       Modal.success({
-        content: "Ваше объявление успешно добавлено",
+        content: "Ваше объявление успешно добавлено!",
         onOk: () => {
           navigate("/");
         },
@@ -54,7 +61,7 @@ const Createitem = () => {
 
   return (
     <>
-      <Form form={form} layout="vertical" onFinish={handleSubmit} initialValues={{ moreInfo: "" }}>
+      <Form form={form} layout="vertical" onFinish={handleSubmit} initialValues={{ moreinfo: "" }}>
         <h3>Новое объявление</h3>
         <Form.Item
           label="Выберите место нахождения питомца:"
@@ -62,7 +69,7 @@ const Createitem = () => {
           rules={[
             {
               required: true,
-              message: "Укажите место нахождения питомца!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
@@ -83,17 +90,17 @@ const Createitem = () => {
           </Select>
         </Form.Item>
         <Form.Item
-          name="animalType"
+          name="type"
           label={"Кого вы пристраиваете"}
           rules={[
             {
               required: true,
-              message: "Укажите кого вы пристраиваете!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
           <Radio.Group>
-            <Radio value="сat"> кошка </Radio>
+            <Radio value="cat"> кошка </Radio>
             <Radio value="dog"> собака </Radio>
             <Radio value="other"> другое </Radio>
           </Radio.Group>
@@ -105,7 +112,7 @@ const Createitem = () => {
           rules={[
             {
               required: true,
-              message: "Укажите пол животного!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
@@ -121,61 +128,61 @@ const Createitem = () => {
           rules={[
             {
               required: true,
-              message: "Укажите, есть ли у животного паспорт!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
           <Radio.Group>
-            <Radio value="passportYes"> да </Radio>
-            <Radio value="passportNo"> нет </Radio>
+            <Radio value="yes"> да </Radio>
+            <Radio value="no"> нет </Radio>
           </Radio.Group>
         </Form.Item>
 
         <Form.Item
-          name="miteTreatment"
+          name="mitetreatment"
           label={"У животного есть обработка от клещей/блох?"}
           rules={[
             {
               required: true,
-              message: "Укажите, есть ли у животного обработка от клещей/блох!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
           <Radio.Group>
-            <Radio value="mitetreaTmentyes"> да </Radio>
-            <Radio value="mitetreaTmentno"> нет </Radio>
+            <Radio value="yes"> да </Radio>
+            <Radio value="no"> нет </Radio>
           </Radio.Group>
         </Form.Item>
 
         <Form.Item
-          name="viralVaccine"
+          name="viralvaccine"
           label={"У животного есть необходимые прививки от вирусных заболеваний?"}
           rules={[
             {
               required: true,
-              message: "Укажите, есть ли у животного необходимые прививики от вирусных заболеваний!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
           <Radio.Group>
-            <Radio value="viralVaccineYes"> да </Radio>
-            <Radio value="viralVaccineNo"> нет </Radio>
+            <Radio value="yes"> да </Radio>
+            <Radio value="no"> нет </Radio>
           </Radio.Group>
         </Form.Item>
 
         <Form.Item
-          name="rabiesVaccine"
+          name="rabiesvaccine"
           label={"У животного есть необходимые прививка от бешенства?"}
           rules={[
             {
               required: true,
-              message: "Укажите, есть ли у животного прививка от бешенства!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
           <Radio.Group>
-            <Radio value="rabiesVaccineYes"> да </Radio>
-            <Radio value="rabiesVaccineNo"> нет </Radio>
+            <Radio value="yes"> да </Radio>
+            <Radio value="no"> нет </Radio>
           </Radio.Group>
         </Form.Item>
 
@@ -185,15 +192,15 @@ const Createitem = () => {
           rules={[
             {
               required: true,
-              message: "Укажите возраст животного!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
           <InputNumber min="0" max="99" step="0.1"></InputNumber>
         </Form.Item>
 
-        <Form.Item name="moreInfo" label={"Дополнительная информация"}>
-          <TextArea />
+        <Form.Item name="moreinfo" label={"Дополнительная информация"}>
+          <TextArea maxLength="600" />
         </Form.Item>
 
         <Form.Item
@@ -207,7 +214,7 @@ const Createitem = () => {
             },
           ]}
         >
-          <Upload name="petPhoto" customRequest={customUpload} listType="picture">
+          <Upload name="petphoto" customRequest={customUpload} listType="picture" accept="image/*">
             <Button>Прикрепить фото</Button>
           </Upload>
         </Form.Item>
@@ -218,14 +225,25 @@ const Createitem = () => {
           rules={[
             {
               required: true,
-              message: "Укажите номер телефона!",
+              message: "Поле должно быть заполнено!",
             },
           ]}
         >
-          <Input prefix="+998" min={1} max={10}></Input>
+          <Input prefix="+998" maxLength="11"></Input>
         </Form.Item>
+
+        <span>
+          <b>Примечание: </b>
+          <i>
+            Информация о животном должна быть краткой и емкой. Убедитесь, чтобы все поля, помеченные символом *
+            были заполнены.
+          </i>
+        </span>
+
+        <br />
+        <br />
         <Form.Item label={"Нажмите, чтоб опубликовать"}>
-          <Button htmlType="submit" type="primary" >
+          <Button htmlType="submit" type="primary" loading={isSaving}>
             Опубликовать
           </Button>
         </Form.Item>

@@ -5,8 +5,9 @@ import Hospitals from "../components/Hospitals";
 import HowToCare from "../components/HowToCare";
 import MainPage from "../components/MainPage";
 import UserProfile from "../components/UserProfile";
-import OtherAnimals from "../components/OtherAnimals";
+import OtherPets from "../components/OtherPets";
 import ErrorPage from "../components/ErrorPage";
+import PetPage from "../components/PetPage";
 
 
 export const routes = [
@@ -17,8 +18,9 @@ export const routes = [
     { path: "/hospitals", element: <Hospitals /> },
     { path: "/user-profile", element: <UserProfile /> },
     { path: "/create-item", element: <CreateItem /> },
-    { path: "/other-animals", element: <OtherAnimals /> },
-    { path: "*", element: <ErrorPage /> }
+    { path: "/other-pets", element: <OtherPets /> },
+    { path: "*", element: <ErrorPage /> },
+    {path: "/pet/:uid", element:<PetPage/>},
 ]
 
 

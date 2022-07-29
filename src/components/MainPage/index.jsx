@@ -19,16 +19,21 @@ const MainPage = () => {
         <img className={style.image} src={image} alt="Logo not found" />
       </div>
       <div className={style.info}>
-        <p className={style.mainname}>Название проекта</p>
+        <p className={style.mainname}>"Pets to you"</p>
         <p className={style.maintext}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed a labore aspernatur voluptas quae
-          asperiores quasi hic optio dolor odit? Ipsa id a et ullam quis soluta sed nam quisquam.
+          Первая платформа в Узбекистане для поиска и пристройства питомцев с простым и понятным интерфейсом.
+          Здесь Вы можете опубликовать свое объявление или же найти свою родную душу.
+          <p>
+            Часто люди заводят собаку или кошку, не до конца осознавая, что животное в доме – это определенные
+            сложности и большая ответственность. Поэтому прежде чем заводить питомца,
+            <NavLink to={"/how-to-care"}> оцените </NavLink> свои силы.          </p>
+          Ваши будущие питомцы ждут вас!
         </p>
 
         {user == undefined && <RegistrationModal />}
         {user != undefined && (
           <Button type="primary">
-            <NavLink to="/user-profile">Мой личный кабинет</NavLink>
+            <NavLink to="/create-item">Добавить объявление</NavLink>
           </Button>
         )}
       </div>

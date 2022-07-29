@@ -34,7 +34,7 @@ const Layout = () => {
               <NavLink to="dogs">Собаки</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <NavLink to="other-animals">Другие животные</NavLink>
+              <NavLink to="other-pets">Другие животные</NavLink>
             </Menu.Item>
           </Menu.SubMenu>
 

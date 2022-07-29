@@ -1,5 +1,6 @@
-import { Tabs } from "antd";
+import { Button, Tabs } from "antd";
 import React from "react";
+import { NavLink } from "react-router-dom";
 import style from "./HowToCare.module.css";
 
 const { TabPane } = Tabs;
@@ -505,6 +506,19 @@ const HowToCare = () => {
           </div>
         </TabPane>
       </Tabs>
+      <div className={style.warning} style={{color:"red"}}>
+        <i>
+          * * * Предоставленная на сайте информация является общей рекомендацией и не является обязательной
+          инструкцией. Для получения точной информации рекомендуем не заниматься самолечением и обращаться
+          напрямую к ветеринарным врачам * * *
+        </i>
+        <div>
+        <br />
+          <Button type="primary">
+            <NavLink to={"/hospitals"}>Ветеринарные клиники</NavLink>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
