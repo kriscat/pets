@@ -4,7 +4,7 @@ import Pets from "../Pets";
 const OtherPets = () => {
  return (
    <>
-     <h3>Другие питомцы:</h3>
+     <h3>Объявления по пристройству других питомцев:</h3>
      <Pets kind="other" />
    </>
  );

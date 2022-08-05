@@ -3,9 +3,9 @@ import Pets from '../Pets';
 
 const Cats = () => {
 
-  return  (
+  return (
     <>
-      <h3>Кошки:</h3>
+      <h3>Объявления по пристройству кошек:</h3>
       <Pets kind="cat" />
     </>
   );

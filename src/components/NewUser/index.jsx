@@ -1,4 +1,4 @@
-import { Button, Form, Input, Checkbox  } from "antd";
+import { Button, Form, Input } from "antd";
 import React, { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../Firebase";
@@ -15,7 +15,7 @@ const onFinishFailed = (errorInfo) => {
   console.log("Ошибка:", errorInfo);
 };
 
-const SignIn = ({closeModal}) => {
+const SignIn = ({ closeModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
@@ -24,20 +24,20 @@ const SignIn = ({closeModal}) => {
     createUser(values);
     closeModal();
   };
- 
+
   if (loading) {
     return <Spin size="large" style={{ marginLeft: "50%" }} />;
   }
   if (user) {
-   return (
-     <div style={{ textAlign: "center" }}>
-       <CheckCircleOutlined style={{ color: "green", fontSize: "55px" }} />
-       <p>
-         Добро пожаловать, <b>{user.user.email} </b>!
-       </p>
-     </div>
-   );
- }
+    return (
+      <div style={{ textAlign: "center" }}>
+        <CheckCircleOutlined style={{ color: "green", fontSize: "55px" }} />
+        <p>
+          Добро пожаловать, <b>{user.user.email} </b>!
+        </p>
+      </div>
+    );
+  }
   return (
     <Form
       name="basic"
@@ -53,7 +53,7 @@ const SignIn = ({closeModal}) => {
     >
       {error && <p style={{ color: "red" }}>Ошибка: {error.message}</p>}
       <Form.Item
-        label="Придумайте логин"
+        label="Логин"
         name="login"
         rules={[
           {
@@ -62,28 +62,28 @@ const SignIn = ({closeModal}) => {
           },
         ]}
       >
-        <Input
-          type="email"
-          value={email}
-          placeholder="обязательно наличие символа @"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Item>
 
       <Form.Item
-        label="Придумайте пароль"
+        label="Пароль"
         name="pass"
         rules={[
           {
             required: true,
             message: "Поле должно быть заполнено!",
           },
+          {
+            type: "string",
+            min: 6,
+            message: "В пароле должно быть не меньше 6 символов",
+          },
         ]}
       >
         <Input.Password
           type="password"
           value={password}
-          placeholder="минимальное количество символов - 7"
+          rules={[]}
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Item>
