@@ -23,7 +23,7 @@ const customUpload = async ({ onError, onSuccess, file, data }) => {
     });
 };
 
-const Petform = ({ data }) => {
+const Petform = ({ data, pets  }) => {
   const [form] = Form.useForm();
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -36,11 +36,10 @@ const Petform = ({ data }) => {
 
   const handleSubmit = (values) => {
     setIsSaving(true);
-
     // console.log(values);
     getDownloadURL(getImageRef(values.upload.file.name)).then((downloadURL) => {
       const petRef = ref(database, "pet");
-      const newPetRef = push(petRef);
+      const newPetRef = pets || push(petRef);
       values.upload = downloadURL;
       // console.log("File available at", downloadURL);
       values.user_uid = user.uid;
@@ -96,8 +95,8 @@ const Petform = ({ data }) => {
           ]}
         >
           <Radio.Group>
-            <Radio value="cat"> кошка </Radio>
-            <Radio value="dog"> собака </Radio>
+            <Radio value="cat"> кошка/кот </Radio>
+            <Radio value="dog"> собака/пёс </Radio>
             <Radio value="other"> другое </Radio>
           </Radio.Group>
         </Form.Item>

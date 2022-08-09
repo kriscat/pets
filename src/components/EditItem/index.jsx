@@ -7,8 +7,9 @@ import { useObject } from "react-firebase-hooks/database";
 import { Spin } from "antd";
 
 const EditItem = () => {
-      let params = useParams();
-     const [snapshot, loading, error] = useObject(ref(database, "pet/" + params.uid));
+  let params = useParams();
+  const pets = ref(database, "pet/" + params.uid);
+  const [snapshot, loading, error] = useObject(pets);
   return (
     <>
       {error && <strong>Ошибка: {error}</strong>}
@@ -16,7 +17,7 @@ const EditItem = () => {
       {snapshot && (
         <>
           <h3>Редактировать объявление</h3>
-          <Petform data={snapshot.val()} />
+          <Petform petRef={pets} data={snapshot.val()} />
         </>
       )}
     </>

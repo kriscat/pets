@@ -28,11 +28,18 @@ const MainPage = () => {
         </p>
         <p className={style.maintext}> Ваши будущие питомцы ждут вас!</p>
 
-        {user === undefined && <RegistrationModal />}
+        {/* {user === undefined && <RegistrationModal />}
         {user !== undefined && (
           <Button type="primary">
             <NavLink to="/create-item">Добавить объявление</NavLink>
           </Button>
+        )} */}
+        {user ? (
+          <Button type="primary">
+            <NavLink to="/create-item">Добавить объявление</NavLink>
+          </Button>
+        ) : (
+         <RegistrationModal/>
         )}
       </div>
     </div>

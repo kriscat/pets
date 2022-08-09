@@ -1,7 +1,7 @@
 .mainpage {
     min-height: calc(100vh - 157px);
     display: flex;
-    padding: 5px;
+    padding: 2px;
     text-align: center;
 }
 
@@ -10,18 +10,18 @@
 }
 
 .mainname {
-    font-size: 35px;
+    font-size: 32px;
     font-weight: 600;
     text-align: center;
 }
 
 .maintext {
-    font-size: 23px;
+    font-size: 20px;
     padding: 5px;
     text-align: justify;
 }
 
 .image{
-    margin: 15% auto;
+    margin: 3% auto;
     width: 550px;
 }

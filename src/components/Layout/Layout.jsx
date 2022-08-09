@@ -1,69 +1,69 @@
 import { NavLink, Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import style from "./Layout.module.css";
 import { routes } from "../../routes/routes";
 import RegistrationModal from "../Registration";
 import { Content, Footer } from "antd/lib/layout/layout";
 import { auth } from "../../Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { signOut } from "firebase/auth";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
+import SubMenu from "antd/lib/menu/SubMenu";
+
+const Layout = () => {
+  const [clicked, setClicked] = useState(false);
+  const handleClick = () => setClicked(true);
+
+  const [user, loading, error] = useAuthState(auth);
 
   const displayRoutes = () => {
-    return routes.map((e) => <Route key={e.path} path={e.path} element={e.element} />);
+    return routes.map((e) => <Route path={e.path} element={e.element} />);
   };
-const Layout = () => {
-    const [user] = useAuthState(auth);
 
   return (
     <>
       <header>
         <Menu mode="horizontal">
-          <Menu.Item key="main">
+          <Menu.Item>
             <NavLink to="/">Главная страница</NavLink>
           </Menu.Item>
-          <Menu.SubMenu title="Выбрать питомца" key={2}>
-            <Menu.Item key="cats">
+          <SubMenu title="Питомцы">
+            <Menu.Item>
               <NavLink to="cats">Кошки</NavLink>
             </Menu.Item>
-            <Menu.Item key="dogs">
+            <Menu.Item>
               <NavLink to="dogs">Собаки</NavLink>
             </Menu.Item>
-            <Menu.Item key="otherPets">
+            <Menu.Item>
               <NavLink to="other-pets">Другие животные</NavLink>
             </Menu.Item>
-          </Menu.SubMenu>
+          </SubMenu>
 
-          <Menu.Item key="care">
+          <Menu.Item>
             <NavLink to="how-to-care">Как ухаживать</NavLink>
           </Menu.Item>
-          <Menu.Item key="hospitals">
+          <Menu.Item>
             <NavLink to="hospitals">Ветклиники</NavLink>
           </Menu.Item>
-          {user !== undefined && (
-            <Menu.SubMenu icon={<UserOutlined />} className={style.submenu} key={8}>
-              <Menu.Item key="createItem">
+
+          {user != undefined && (
+            <Menu.SubMenu icon={<UserOutlined />} className={style.submenu}>
+              <Menu.Item>
                 <NavLink to="create-item">Добавить объявление</NavLink>
               </Menu.Item>
-              <Menu.Item key="userProfile">
+              <Menu.Item>
                 <NavLink to="user-profile">Личный кабинет</NavLink>
               </Menu.Item>
-              <Menu.Item
-                key="logOut"
-                danger
-                icon={<LogoutOutlined />}
-                onClick={() => {
-                  signOut(auth);
-                }}
-              >
-                Выйти
+              <Menu.Item danger icon={<LogoutOutlined />}>
+                <NavLink to="/logout">
+                  Выйти
+                </NavLink>
               </Menu.Item>
             </Menu.SubMenu>
           )}
 
-          {user === undefined && (
-            <Menu.Item className={style.submenu} key="registration">
+          {user == undefined && (
+            <Menu.Item className={style.submenu}>
               <RegistrationModal />
             </Menu.Item>
           )}

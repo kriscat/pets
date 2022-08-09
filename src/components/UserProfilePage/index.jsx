@@ -3,13 +3,12 @@ import { auth, database } from "../../Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useList } from "react-firebase-hooks/database";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Card, Spin } from "antd";
+import { Card, Spin, Image } from "antd";
 import { equalTo, orderByChild, ref, query, remove } from "firebase/database";
 import { NavLink } from "react-router-dom";
 const { Meta } = Card;
 
-// const deletePet = () => {
-// }
+
 
 const InnerUserProfile = (props) => {
   const user = props.user;
@@ -33,12 +32,13 @@ const InnerUserProfile = (props) => {
 };
 
 const PetCard = ({ pet, uid }) => {
+
   return (
     <Card
       style={{
         width: 300,
       }}
-      cover={<img src={pet.upload} />}
+      cover={<Image src={pet.upload} placeholder={<Spin />} />}
       actions={[
         <NavLink to={`/pet/${uid}/edit`}>
           <EditOutlined key="edit" />
