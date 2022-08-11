@@ -1,3 +1,4 @@
+import { LoadingOutlined } from "@ant-design/icons";
 import { Card, Col, Row, Image } from "antd";
 import Meta from "antd/lib/card/Meta";
 import React from "react";
@@ -28,7 +29,15 @@ const AllPetsPage = () => {
             <Card
               hoverable
               style={cardStyle}
-              cover={<Image preview={false} src={catIcon}></Image>}
+              cover={
+                <Image
+                  preview={false}
+                  placeholder={
+                    <LoadingOutlined style={{ fontSize: "25px", margin: "auto 50%", color: "rebeccapurple" }} />
+                  }
+                  src={catIcon}
+                ></Image>
+              }
               onClick={() => navigate("/cats")}
             >
               <Meta title="Кошки" />
@@ -36,7 +45,15 @@ const AllPetsPage = () => {
             <Card
               hoverable
               style={cardStyle}
-              cover={<Image preview={false} src={dogIcon}></Image>}
+              cover={
+                <Image
+                  preview={false}
+                  placeholder={
+                    <LoadingOutlined style={{ fontSize: "25px", margin: "auto 50%", color: "rebeccapurple" }} />
+                  }
+                  src={dogIcon}
+                ></Image>
+              }
               onClick={() => navigate("/dogs")}
             >
               <Meta title="Собаки" />
@@ -44,7 +61,15 @@ const AllPetsPage = () => {
             <Card
               hoverable
               style={cardStyle}
-              cover={<Image preview={false} src={hamsterIcon}></Image>}
+              cover={
+                <Image
+                  preview={false}
+                  placeholder={
+                    <LoadingOutlined style={{ fontSize: "25px", margin: "auto 50%", color: "rebeccapurple" }} />
+                  }
+                  src={hamsterIcon}
+                ></Image>
+              }
               onClick={() => navigate("/other-pets")}
             >
               <Meta title="Другие питомцы" />

@@ -12,6 +12,7 @@ const MainPage = () => {
 
   return (
     <div className={style.mainpage}>
+     
       <div>
         <img className={style.image} src={image} alt="Logo not found" />
       </div>
@@ -33,7 +34,7 @@ const MainPage = () => {
             <NavLink to="/create-item">Добавить объявление</NavLink>
           </Button>
         ) : (
-         <RegistrationModal/>
+          <RegistrationModal />
         )}
       </div>
     </div>

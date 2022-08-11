@@ -7,12 +7,12 @@ const LoginForm = ({ closeModal }) => {
   const auth = getAuth(firebaseApp);
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
   const onFinish = (values) => {
-    console.log("Success:", values);
+    // console.log("Success:", values);
     signInWithEmailAndPassword(values.username, values.password, values.remem);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
   };
 
   if (loading) {

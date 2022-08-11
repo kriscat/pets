@@ -9,7 +9,7 @@ const Cats = () => {
       <StepBackButton />
       <h3> Объявления по пристройству кошек:</h3>
       <Pets kind="cat" />
-      <HomeBtn/>
+      <HomeBtn />
     </>
   );
 };

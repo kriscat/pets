@@ -3,9 +3,10 @@ import { auth, database } from "../../Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useList } from "react-firebase-hooks/database";
 import { DeleteOutlined, EditOutlined, LoadingOutlined } from "@ant-design/icons";
-import { Card, Spin, Image, Row, Col } from "antd";
+import { Card, Image, Row, Col, Modal } from "antd";
 import { equalTo, orderByChild, ref, query, remove } from "firebase/database";
 import { NavLink, useNavigate } from "react-router-dom";
+import Preloader from "../Preloader";
 
 const { Meta } = Card;
 
@@ -23,12 +24,12 @@ const InnerUserProfile = (props) => {
   const petRef = query(ref(database, "/pet"), orderByChild("user_uid"), equalTo(user.uid));
   const [snapshots, loading, error] = useList(petRef);
 
-  console.log(snapshots, loading, error);
+  console.log(petRef);
   return (
     <>
       <strong>Вы вошли, как {user.email}</strong>
       {error && <strong>Ошибка: {error}</strong>}
-      {loading && <Spin style={{ margin: "10px 50%" }} size="large" />}
+      {loading && <Preloader />}
       {!loading && snapshots && (
         <div className="site-card-wrapper">
           <Row gutter={24}>
@@ -45,11 +46,20 @@ const InnerUserProfile = (props) => {
 };
 
 const PetCard = ({ pet, uid }) => {
-  const navigate = useNavigate();
+   const success = () => {
+     Modal.success({
+       content: "Ваше объявление удалено",
+       onOk: () => {
+         navigate("/");
+       },
+     });
+   };
   const deletePet = () => {
     remove(ref(database, `/pet/${uid}`));
-    navigate("/");
+    success();
   };
+
+  const navigate = useNavigate();
 
   const animalType = () => {
     if (pet.type === "cat") {
@@ -64,32 +74,35 @@ const PetCard = ({ pet, uid }) => {
   };
 
   return (
-    <Card
-      bordered={true}
-      style={{
-        width: "300px",
-        margin: "2%",
-        padding: "3%",
-        textAlign: "center",
-      }}
-      cover={
-        <Image
-          preview={false}
-          src={pet.upload}
-          placeholder={
-            <LoadingOutlined style={{ fontSize: "30px", margin: "10px 50%", color: "rebeccapurple" }} />
-          }
-        />
-      }
-      actions={[
-        <NavLink to={`/pet/${uid}/edit`}>
-          <EditOutlined key="edit" />
-        </NavLink>,
-        <DeleteOutlined key="delete" onClick={deletePet} />,
-      ]}
-    >
-      <Meta title={`Питомец: ${animalType()}`} />
-    </Card>
+    <>
+      
+      <Card
+        bordered={true}
+        style={{
+          width: "300px",
+          margin: "2%",
+          padding: "3%",
+          textAlign: "center",
+        }}
+        cover={
+          <Image
+            preview={false}
+            src={pet.upload}
+            placeholder={
+              <LoadingOutlined style={{ fontSize: "30px", margin: "10px 50%", color: "rebeccapurple" }} />
+            }
+          />
+        }
+        actions={[
+          <NavLink to={`/pet/${uid}/edit`}>
+            <EditOutlined key="edit" />
+          </NavLink>,
+          <DeleteOutlined key="delete" onClick={deletePet} />,
+        ]}
+      >
+        <Meta title={`Питомец: ${animalType()}`} />
+      </Card>
+    </>
   );
 };
 

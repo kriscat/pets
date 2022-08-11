@@ -20,15 +20,19 @@ const Layout = () => {
 
   return (
     <>
-      <header>
-        <Menu key={"menu"} mode="horizontal">
-          <Menu.Item key={"main"}>
-            <NavLink to="/">Главная страница</NavLink>
-          </Menu.Item>
-          <Menu.Item key={"allPets"}>
-            <NavLink to="/pets">Все питомцы</NavLink>
-          </Menu.Item>
-          {/* <Menu.SubMenu key={"pets"} title="Питомцы">
+      {error && <strong>Ошибка: {error}</strong>}
+      {loading && <Preloader />}
+      {!loading && (
+        <>
+          <header>
+            <Menu key={"menu"} mode="horizontal">
+              <Menu.Item key={"main"}>
+                <NavLink to="/">Главная страница</NavLink>
+              </Menu.Item>
+              <Menu.Item key={"allPets"}>
+                <NavLink to="/pets">Все питомцы</NavLink>
+              </Menu.Item>
+              {/* <Menu.SubMenu key={"pets"} title="Питомцы">
                 <Menu.Item key={"cats"}>
                   <NavLink to="cats">Кошки</NavLink>
                 </Menu.Item>
@@ -39,46 +43,51 @@ const Layout = () => {
                   <NavLink to="other-pets">Другие животные</NavLink>
                 </Menu.Item>
               </Menu.SubMenu> */}
-          <Menu.Item key={"howToCare"}>
-            <NavLink to="how-to-care">Как ухаживать</NavLink>
-          </Menu.Item>
-          <Menu.Item key={"hospitals"}>
-            <NavLink to="hospitals">Ветклиники</NavLink>
-          </Menu.Item>
-          {user != undefined && (
-            <Menu.SubMenu key={"usersFeatures"} icon={<UserOutlined />} className={style.submenu}>
-              <Menu.Item key={"petForm"}>
-                <NavLink to="create-item">Добавить объявление</NavLink>
+              <Menu.Item key={"howToCare"}>
+                <NavLink to="how-to-care">Как ухаживать</NavLink>
               </Menu.Item>
-              <Menu.Item key={"userProfile"}>
-                <NavLink to="user-profile">Личный кабинет</NavLink>
+              <Menu.Item key={"hospitals"}>
+                <NavLink to="hospitals">Ветклиники</NavLink>
               </Menu.Item>
-              <Menu.Item key={"logout"} danger icon={<LogoutOutlined />}>
-                <NavLink to="/logout">Выйти</NavLink>
-              </Menu.Item>
-            </Menu.SubMenu>
-          )}
+              {user != undefined && (
+                <div className={style.submenu}>
+                  <strong> {user.email} </strong>
+                  <Menu.SubMenu key={"usersFeatures"} icon={<UserOutlined />}>
+                    <Menu.Item key={"petForm"}>
+                      <NavLink to="create-item">Добавить объявление</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key={"userProfile"}>
+                      <NavLink to="user-profile">Личный кабинет</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key={"logout"} danger icon={<LogoutOutlined />}>
+                      <NavLink to="/logout">Выйти</NavLink>
+                    </Menu.Item>
+                  </Menu.SubMenu>
+                </div>
+              )}
 
-          {user == undefined && (
-            <Menu.Item key={"registration"} className={style.submenu}>
-              <RegistrationModal />
-            </Menu.Item>
-          )}
-        </Menu>
-      </header>
-      <Content
-        style={{
-          padding: "20px 50px",
-          minHeight: "100%",
-          flexGrow: "1",
-        }}
-      >
-        <Routes>{displayRoutes()}</Routes>
-      </Content>
-      <Footer style={{ textAlign: "center" }}>
-        <a href="https://t.me/myaaaau">Нажми сюда, если у тебя возникнут вопросы</a>
-        <span> © 2022</span>
-      </Footer>
+              {user == undefined && (
+                <Menu.Item key={"registration"} className={style.submenu}>
+                  <RegistrationModal />
+                </Menu.Item>
+              )}
+            </Menu>
+          </header>
+          <Content
+            style={{
+              padding: "20px 50px",
+              minHeight: "100%",
+              flexGrow: "1",
+            }}
+          >
+            <Routes>{displayRoutes()}</Routes>
+          </Content>
+          <Footer style={{ textAlign: "center" }}>
+            <a href="https://t.me/myaaaau">Нажми сюда, если у тебя возникнут вопросы</a>
+            <span> © 2022</span>
+          </Footer>
+        </>
+      )}
     </>
   );
 };

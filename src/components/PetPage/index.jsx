@@ -20,8 +20,8 @@ const PetDesctiption = ({ data }) => {
   
   return (
     <>
-      <StepBackButton/>
-    
+      
+      <StepBackButton />
       <div className="block">
         <Row align={"middle"} justify={"center"}>
           {/* <p> {params.uid}</p> */}

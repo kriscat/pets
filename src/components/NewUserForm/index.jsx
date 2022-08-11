@@ -2,10 +2,9 @@ import { Button, Form, Input, Modal } from "antd";
 import React, { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../Firebase";
-import { Spin } from "antd";
+import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { CheckCircleOutlined } from "@ant-design/icons";
-import Preloader from "../Preloader"
+import Preloader from "../Preloader";
 
 const createUser = (values) => {
   console.log("Успешно:", values);
@@ -20,6 +19,7 @@ const SignIn = ({ closeModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
     createUser(values);
@@ -27,17 +27,18 @@ const SignIn = ({ closeModal }) => {
   };
 
   if (loading) {
-    return <Preloader/>;
-    }
+    return <Preloader />;
+  }
   if (user) {
-    return (
-      <Modal style={{ textAlign: "center" }}>
-        <CheckCircleOutlined style={{ color: "green", fontSize: "55px" }} />
-        <p>
-          Добро пожаловать, <b>{user.user.email} </b>!
-        </p>
-      </Modal>
-    );
+    const success = () => {
+      Modal.success({
+        content: `Добро пожаловать, ${user.user.email} !`,
+        onOk: () => {
+          navigate("/");
+        },
+      });
+    };
+    return success();
   }
   return (
     <Form
