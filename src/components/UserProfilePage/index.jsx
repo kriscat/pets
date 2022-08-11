@@ -8,8 +8,6 @@ import { equalTo, orderByChild, ref, query, remove } from "firebase/database";
 import { NavLink } from "react-router-dom";
 const { Meta } = Card;
 
-
-
 const InnerUserProfile = (props) => {
   const user = props.user;
   const petRef = query(ref(database, "/pet"), orderByChild("user_uid"), equalTo(user.uid));
@@ -32,7 +30,17 @@ const InnerUserProfile = (props) => {
 };
 
 const PetCard = ({ pet, uid }) => {
-
+  const animalType = () => {
+    if (pet.type == "cat") {
+   return   "кошка / кот";
+    } else if (pet.type == "dog") {
+   return   "собака (пёс)";
+    } else if (pet.type == "other") {
+   return "другое";
+    } else {
+    return "животное";
+    }
+  };
   return (
     <Card
       style={{
@@ -46,7 +54,7 @@ const PetCard = ({ pet, uid }) => {
         <DeleteOutlined key="delete" />,
       ]}
     >
-      <Meta title={pet.type} />
+      <Meta title={`Вид животного: ${animalType()}`} />
     </Card>
   );
 };

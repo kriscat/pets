@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../Firebase";
 import { useMemo } from "react";
+import locations from "../../locations";
 
 const { TextArea } = Input;
 
@@ -57,7 +58,6 @@ const Petform = ({ data, pets  }) => {
   return (
     <>
       <Form form={form} layout="vertical" onFinish={handleSubmit} initialValues={data}>
-       
         <Form.Item
           label="Выберите место нахождения питомца:"
           name="location"
@@ -69,19 +69,9 @@ const Petform = ({ data, pets  }) => {
           ]}
         >
           <Select>
-            <Select.Option value="tashkent">Ташкент и Ташкентская область</Select.Option>
-            <Select.Option value="andijan">Андижанская область</Select.Option>
-            <Select.Option value="bukhara">Бухарская область</Select.Option>
-            <Select.Option value="djizak">Джизакская область</Select.Option>
-            <Select.Option value="karakalpakstan">Каракалпакстан</Select.Option>
-            <Select.Option value="kashkadarya">Кашкадарьинская область</Select.Option>
-            <Select.Option value="navoi">Навоийская область</Select.Option>
-            <Select.Option value="namangan">Наманганская область</Select.Option>
-            <Select.Option value="samarkand">Самаркандская область</Select.Option>
-            <Select.Option value="surkhandarya">Сурхандарьинская область</Select.Option>
-            <Select.Option value="sirdarya">Сырдарьинская область</Select.Option>
-            <Select.Option value="fergana">Ферганская область</Select.Option>
-            <Select.Option value="khorezm">Хорезмская область</Select.Option>
+            {locations.map((location) => (
+              <Select.Option value={location.key}>{location.value}</Select.Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item
