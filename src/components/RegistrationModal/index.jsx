@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
-
-import SignIn from "../NewUser";
+import SignIn from "../NewUserForm";
 import { Tabs } from "antd";
-import LoginForm from "../LoginForm";
+import LoginForm from "../LoginFormPage";
 
 const { TabPane } = Tabs;
 
@@ -17,7 +16,6 @@ const RegistrationModal = ({ setActive }) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
- 
 
   return (
     <>

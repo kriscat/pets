@@ -1,10 +1,11 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import React, { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../Firebase";
 import { Spin } from "antd";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { CheckCircleOutlined } from "@ant-design/icons";
+import Preloader from "../Preloader"
 
 const createUser = (values) => {
   console.log("Успешно:", values);
@@ -26,16 +27,16 @@ const SignIn = ({ closeModal }) => {
   };
 
   if (loading) {
-    return <Spin size="large" style={{ marginLeft: "50%" }} />;
-  }
+    return <Preloader/>;
+    }
   if (user) {
     return (
-      <div style={{ textAlign: "center" }}>
+      <Modal style={{ textAlign: "center" }}>
         <CheckCircleOutlined style={{ color: "green", fontSize: "55px" }} />
         <p>
           Добро пожаловать, <b>{user.user.email} </b>!
         </p>
-      </div>
+      </Modal>
     );
   }
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Col, Row } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { PhoneOutlined } from '@ant-design/icons';
+import HomeBtn from '../HomeBtn';
 
 const cardsData = [
   {
@@ -70,7 +71,7 @@ const cardsData = [
 
 const Hospital = () => {
     return (
-      <Content className="site-card-wrapper" >
+      <Content className="site-card-wrapper">
         <Row gutter={24}>
           {cardsData.map((e) => (
             <Col span={8}>
@@ -84,6 +85,7 @@ const Hospital = () => {
             </Col>
           ))}
         </Row>
+        <HomeBtn />
       </Content>
     );
  

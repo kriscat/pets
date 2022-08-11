@@ -1,5 +1,5 @@
 import React from "react";
-import Petform from "../PetForm";
+import Petform from "../PetFormPage";
 import { database } from "../../Firebase";
 import { ref } from "firebase/database";
 import { useParams } from "react-router-dom";
@@ -13,7 +13,7 @@ const EditItem = () => {
   return (
     <>
       {error && <strong>Ошибка: {error}</strong>}
-      {loading && <Spin size="large" />}
+      {loading && <Spin style={{ margin: "10px 50%" }} size="large" />}
       {snapshot && (
         <>
           <h3>Редактировать объявление</h3>

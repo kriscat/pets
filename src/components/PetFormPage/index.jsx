@@ -20,7 +20,7 @@ const customUpload = async ({ onError, onSuccess, file, data }) => {
     })
     .catch((e) => {
       onError(e);
-      console.log(e);
+      // console.log(e);
     });
 };
 
@@ -57,8 +57,9 @@ const Petform = ({ data, pets  }) => {
 
   return (
     <>
-      <Form form={form} layout="vertical" onFinish={handleSubmit} initialValues={data}>
+      <Form key={form} form={form} layout="vertical" onFinish={handleSubmit} initialValues={data}>
         <Form.Item
+          
           label="Выберите место нахождения питомца:"
           name="location"
           rules={[
@@ -75,6 +76,7 @@ const Petform = ({ data, pets  }) => {
           </Select>
         </Form.Item>
         <Form.Item
+      
           name="type"
           label={"Кого вы пристраиваете"}
           rules={[
@@ -92,6 +94,7 @@ const Petform = ({ data, pets  }) => {
         </Form.Item>
 
         <Form.Item
+    
           name="gender"
           label={"Укажите пол животного"}
           rules={[
@@ -108,6 +111,7 @@ const Petform = ({ data, pets  }) => {
         </Form.Item>
 
         <Form.Item
+       
           name="passport"
           label={"У животного есть паспорт?"}
           rules={[
@@ -124,6 +128,7 @@ const Petform = ({ data, pets  }) => {
         </Form.Item>
 
         <Form.Item
+       
           name="mitetreatment"
           label={"У животного есть обработка от клещей/блох?"}
           rules={[
@@ -140,6 +145,7 @@ const Petform = ({ data, pets  }) => {
         </Form.Item>
 
         <Form.Item
+       
           name="viralvaccine"
           label={"У животного есть необходимые прививки от вирусных заболеваний?"}
           rules={[
@@ -156,6 +162,7 @@ const Petform = ({ data, pets  }) => {
         </Form.Item>
 
         <Form.Item
+         
           name="rabiesvaccine"
           label={"У животного есть прививка от бешенства?"}
           rules={[
@@ -172,6 +179,7 @@ const Petform = ({ data, pets  }) => {
         </Form.Item>
 
         <Form.Item
+      
           name="age"
           label={"Укажите возраст животного"}
           rules={[
@@ -184,14 +192,15 @@ const Petform = ({ data, pets  }) => {
           <InputNumber min="0" max="99" step="0.1"></InputNumber>
         </Form.Item>
 
-        <Form.Item name="moreinfo" label={"Дополнительная информация"}>
+        <Form.Item key={"petMoreInfo"} name="moreinfo" label={"Дополнительная информация"}>
           <TextArea maxLength="600" />
         </Form.Item>
 
         <Form.Item
+       
           name="upload"
           label={"Добавьте фото"}
-          // valuePropName="fileList"
+       
           rules={[
             {
               required: true,
@@ -211,6 +220,7 @@ const Petform = ({ data, pets  }) => {
         </Form.Item>
 
         <Form.Item
+        
           name="tel"
           label={"Введите номер телефона"}
           rules={[
@@ -233,7 +243,7 @@ const Petform = ({ data, pets  }) => {
 
         <br />
         <br />
-        <Form.Item label={"Нажмите, чтоб опубликовать"}>
+        <Form.Item  label={"Нажмите, чтоб опубликовать"}>
           <Button htmlType="submit" type="primary" loading={isSaving}>
             Опубликовать
           </Button>

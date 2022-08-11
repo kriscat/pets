@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./MainPage.module.css";
 import image from "../../images/10668.jpg";
-import RegistrationModal from "../Registration";
+import RegistrationModal from "../RegistrationModal";
 import { auth } from "../../Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Button } from "antd";
@@ -28,12 +28,6 @@ const MainPage = () => {
         </p>
         <p className={style.maintext}> Ваши будущие питомцы ждут вас!</p>
 
-        {/* {user === undefined && <RegistrationModal />}
-        {user !== undefined && (
-          <Button type="primary">
-            <NavLink to="/create-item">Добавить объявление</NavLink>
-          </Button>
-        )} */}
         {user ? (
           <Button type="primary">
             <NavLink to="/create-item">Добавить объявление</NavLink>
