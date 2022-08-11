@@ -5,48 +5,52 @@ import { useList } from "react-firebase-hooks/database";
 import { DeleteOutlined, EditOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Card, Spin, Image, Row, Col } from "antd";
 import { equalTo, orderByChild, ref, query, remove } from "firebase/database";
-import { NavLink } from "react-router-dom";
-import { Content } from "antd/lib/layout/layout";
+import { NavLink, useNavigate } from "react-router-dom";
+
 const { Meta } = Card;
+
+const colStyle = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "1%",
+  margin: "1% auto",
+};
 
 const InnerUserProfile = (props) => {
   const user = props.user;
   const petRef = query(ref(database, "/pet"), orderByChild("user_uid"), equalTo(user.uid));
   const [snapshots, loading, error] = useList(petRef);
-  // const deletePet = () => {
-  //      return (
-  //     <>
-  //       {error && <strong>Ошибка: {error}</strong>}
-  //       {loading && <Spin style={{ margin: "10px 50%" }} size="large" />}
-  //       {!loading && (remove(ref(database, "/pet")))}
-  //     </>
-  //   );
-  // };
 
-  // console.log(snapshots);
+  console.log(snapshots, loading, error);
   return (
     <>
       <strong>Вы вошли, как {user.email}</strong>
       {error && <strong>Ошибка: {error}</strong>}
       {loading && <Spin style={{ margin: "10px 50%" }} size="large" />}
       {!loading && snapshots && (
-        <Content className="site-card-wrapper">
+        <div className="site-card-wrapper">
           <Row gutter={24}>
-            <Col span={8}>
-              <div>
-                {snapshots.map((snapshot) => (
-                  <PetCard uid={snapshot.key} key={snapshot.key} pet={snapshot.val()}  />
-                ))}
-              </div>
+            <Col span={24} style={colStyle}>
+              {snapshots.map((snapshot) => (
+                <PetCard uid={snapshot.key} key={snapshot.key} pet={snapshot.val()} />
+              ))}
             </Col>
           </Row>
-        </Content>
+        </div>
       )}
     </>
   );
 };
 
 const PetCard = ({ pet, uid }) => {
+  const navigate = useNavigate();
+  const deletePet = () => {
+    remove(ref(database, `/pet/${uid}`));
+    navigate("/");
+  };
+
   const animalType = () => {
     if (pet.type === "cat") {
       return "кошка / кот";
@@ -60,30 +64,32 @@ const PetCard = ({ pet, uid }) => {
   };
 
   return (
-    <div>
-      <Card
-        bordered={true}
-        style={{
-          width: "80%",
-        }}
-        cover={
-          <Image
-            src={pet.upload}
-            placeholder={
-              <LoadingOutlined style={{ fontSize: "30px", margin: "10px 50%", color: "rebeccapurple" }} />
-            }
-          />
-        }
-        actions={[
-          <NavLink to={`/pet/${uid}/edit`}>
-            <EditOutlined key="edit" />
-          </NavLink>,
-          <DeleteOutlined key="delete"  />,
-        ]}
-      >
-        <Meta title={`Питомец: ${animalType()}`} />
-      </Card>
-    </div>
+    <Card
+      bordered={true}
+      style={{
+        width: "300px",
+        margin: "2%",
+        padding: "3%",
+        textAlign: "center",
+      }}
+      cover={
+        <Image
+          preview={false}
+          src={pet.upload}
+          placeholder={
+            <LoadingOutlined style={{ fontSize: "30px", margin: "10px 50%", color: "rebeccapurple" }} />
+          }
+        />
+      }
+      actions={[
+        <NavLink to={`/pet/${uid}/edit`}>
+          <EditOutlined key="edit" />
+        </NavLink>,
+        <DeleteOutlined key="delete" onClick={deletePet} />,
+      ]}
+    >
+      <Meta title={`Питомец: ${animalType()}`} />
+    </Card>
   );
 };
 

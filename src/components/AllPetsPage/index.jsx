@@ -11,22 +11,20 @@ const cardStyle = {
   margin: "2%",
   padding: "1%",
 };
+const colStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "1%",
+  margin: "1% auto",
+};
 const AllPetsPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <>
       <div className="site-card-wrapper">
         <Row>
-          <Col
-            span={24}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "1%",
-              margin: "1% auto",
-            }}
-          >
+          <Col span={24} style={colStyle}>
             <Card
               hoverable
               style={cardStyle}
@@ -55,7 +53,7 @@ const AllPetsPage = () => {
         </Row>
       </div>
 
-      <HomeBtn/>
+      <HomeBtn />
     </>
   );
 };

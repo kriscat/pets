@@ -12,9 +12,6 @@ import SubMenu from "antd/lib/menu/SubMenu";
 import Preloader from "../Preloader";
 
 const Layout = () => {
-  const [clicked, setClicked] = useState(false);
-  const handleClick = () => setClicked(true);
-
   const [user, loading, error] = useAuthState(auth);
 
   const displayRoutes = () => {
@@ -23,19 +20,15 @@ const Layout = () => {
 
   return (
     <>
-      {error && <strong>Ошибка: {error}</strong>}
-      {loading && <Preloader />}
-      {!loading && (
-        <>
-          <header>
-            <Menu key={"menu"} mode="horizontal">
-              <Menu.Item key={"main"}>
-                <NavLink to="/">Главная страница</NavLink>
-              </Menu.Item>
-              <Menu.Item key={"allPets"}>
-                <NavLink to="/pets">Все питомцы</NavLink>
-              </Menu.Item>
-              {/* <Menu.SubMenu key={"pets"} title="Питомцы">
+      <header>
+        <Menu key={"menu"} mode="horizontal">
+          <Menu.Item key={"main"}>
+            <NavLink to="/">Главная страница</NavLink>
+          </Menu.Item>
+          <Menu.Item key={"allPets"}>
+            <NavLink to="/pets">Все питомцы</NavLink>
+          </Menu.Item>
+          {/* <Menu.SubMenu key={"pets"} title="Питомцы">
                 <Menu.Item key={"cats"}>
                   <NavLink to="cats">Кошки</NavLink>
                 </Menu.Item>
@@ -46,49 +39,46 @@ const Layout = () => {
                   <NavLink to="other-pets">Другие животные</NavLink>
                 </Menu.Item>
               </Menu.SubMenu> */}
-              <Menu.Item key={"howToCare"}>
-                <NavLink to="how-to-care">Как ухаживать</NavLink>
+          <Menu.Item key={"howToCare"}>
+            <NavLink to="how-to-care">Как ухаживать</NavLink>
+          </Menu.Item>
+          <Menu.Item key={"hospitals"}>
+            <NavLink to="hospitals">Ветклиники</NavLink>
+          </Menu.Item>
+          {user != undefined && (
+            <Menu.SubMenu key={"usersFeatures"} icon={<UserOutlined />} className={style.submenu}>
+              <Menu.Item key={"petForm"}>
+                <NavLink to="create-item">Добавить объявление</NavLink>
               </Menu.Item>
-              <Menu.Item key={"hospitals"}>
-                <NavLink to="hospitals">Ветклиники</NavLink>
+              <Menu.Item key={"userProfile"}>
+                <NavLink to="user-profile">Личный кабинет</NavLink>
               </Menu.Item>
+              <Menu.Item key={"logout"} danger icon={<LogoutOutlined />}>
+                <NavLink to="/logout">Выйти</NavLink>
+              </Menu.Item>
+            </Menu.SubMenu>
+          )}
 
-              {user != undefined && (
-                <Menu.SubMenu key={"usersFeatures"} icon={<UserOutlined />} className={style.submenu}>
-                  <Menu.Item key={"petForm"}>
-                    <NavLink to="create-item">Добавить объявление</NavLink>
-                  </Menu.Item>
-                  <Menu.Item key={"userProfile"}>
-                    <NavLink to="user-profile">Личный кабинет</NavLink>
-                  </Menu.Item>
-                  <Menu.Item key={"logout"} danger icon={<LogoutOutlined />}>
-                    <NavLink to="/logout">Выйти</NavLink>
-                  </Menu.Item>
-                </Menu.SubMenu>
-              )}
-
-              {user == undefined && (
-                <Menu.Item key={"registration"} className={style.submenu}>
-                  <RegistrationModal />
-                </Menu.Item>
-              )}
-            </Menu>
-          </header>
-          <Content
-            style={{
-              padding: "20px 50px",
-              minHeight: "100%",
-              flexGrow: "1",
-            }}
-          >
-            <Routes>{displayRoutes()}</Routes>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            <a href="https://t.me/myaaaau">Нажми сюда, если у тебя возникнут вопросы</a>
-            <span> © 2022</span>
-          </Footer>
-        </>
-      )}
+          {user == undefined && (
+            <Menu.Item key={"registration"} className={style.submenu}>
+              <RegistrationModal />
+            </Menu.Item>
+          )}
+        </Menu>
+      </header>
+      <Content
+        style={{
+          padding: "20px 50px",
+          minHeight: "100%",
+          flexGrow: "1",
+        }}
+      >
+        <Routes>{displayRoutes()}</Routes>
+      </Content>
+      <Footer style={{ textAlign: "center" }}>
+        <a href="https://t.me/myaaaau">Нажми сюда, если у тебя возникнут вопросы</a>
+        <span> © 2022</span>
+      </Footer>
     </>
   );
 };
