@@ -1,6 +1,6 @@
 {
   "name": "pets",
-  "homepage": "./",
+  "homepage": "https://kriscat.github.io/pets/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
